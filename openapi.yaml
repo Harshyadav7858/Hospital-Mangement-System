@@ -1,0 +1,106 @@
+openapi: 3.0.3
+info:
+  title: HMS API
+  version: 0.1.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /api/auth/login:
+    post:
+      summary: Login with username and password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Logged in
+        '401':
+          description: Unauthorized
+  /api/auth/logout:
+    post:
+      summary: Logout and invalidate session
+      responses:
+        '204':
+          description: Logged out
+  /api/auth/me:
+    get:
+      summary: Get current user
+      responses:
+        '200':
+          description: Current user
+        '401':
+          description: Unauthorized
+  /api/auth/csrf:
+    get:
+      summary: Get CSRF token
+      responses:
+        '200':
+          description: CSRF token
+  /api/doctors:
+    get:
+      summary: List doctors
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: size
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Page of doctors
+    post:
+      summary: Create doctor
+      responses:
+        '200':
+          description: Created
+  /api/patients:
+    get:
+      summary: List patients
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: size
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Page of patients
+    post:
+      summary: Create patient
+      responses:
+        '200':
+          description: Created
+  /api/appointments:
+    get:
+      summary: List appointments
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: size
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Page of appointments
+    post:
+      summary: Create appointment
+      responses:
+        '200':
+          description: Created
